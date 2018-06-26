@@ -1,7 +1,14 @@
 {
   "name": "fullstack-boiler",
   "version": "1.0.0",
+  "description": "A site about food",
+  "repository": "https://github.com/anthony-xiao/fullstack-boiler.git",
   "main": "server/index.js",
+  "scripts": {
+    "dev": "nodemon server",
+    "start": "node server/index",
+    "knex": "knex"
+  },
   "author": "anthony-xiao <juniorxiao01@gmail.com>",
   "license": "MIT",
   "dependencies": {
