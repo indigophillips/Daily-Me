@@ -5,6 +5,7 @@
   "author": "anthony-xiao <juniorxiao01@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "knex": "^0.14.6",
     "sqlite3": "^4.0.1"
