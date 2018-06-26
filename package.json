@@ -9,6 +9,12 @@
     "start": "node server/index",
     "knex": "knex"
   },
+  "babel": {
+    "presets": [
+      "env",
+      "react"
+    ]
+  },
   "author": "anthony-xiao <juniorxiao01@gmail.com>",
   "license": "MIT",
   "dependencies": {
