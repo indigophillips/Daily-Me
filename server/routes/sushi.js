@@ -1,10 +1,7 @@
 const express = require('express')
-const bodyparser = require('body-parser')
-const router = express.Router
+const router = express.Router()
 
 const db = require('../db/db')
-
-router.use(bodyparser.json())
 
 router.get('/', (req, res) => {
   db.allSushi()
@@ -69,3 +66,5 @@ router.delete('/:id', (req, res) => {
       res.status(500).send('Unable to read from database')
     })
 })
+
+module.exports = router
