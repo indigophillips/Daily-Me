@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const id = req.params.id
-  db.allSushi(id)
+  db.getSushi(id)
     .then(sush => {
       res.json(sush)
     })
@@ -46,7 +46,7 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
   const sushi = req.body
-  db.newSushi(sushi)
+  db.editSushi(sushi)
     .then(() => {
       res.status(200).end()
     })
@@ -59,7 +59,7 @@ router.put('/', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   const id = req.params.id
-  db.newSushi(id)
+  db.deleteSushi(id)
     .then(() => {
       res.status(200).end()
     })
