@@ -3,37 +3,31 @@ const config = require(path.join(__dirname, '../../knexfile')).development
 const knex = require('knex')(config)
 
 module.exports = {
-  allSushi,
-  getSushi,
-  newSushi,
-  editSushi,
-  deleteSushi
+  getTasks,
+  addTask,
+  editTask,
+  deleteTask
 }
 
-function allSushi () {
+function getTasks () {
   const db = knex
-  return db('sushi').select()
+  return db('tasks').select()
 }
 
-function getSushi (id) {
+function addTask (task) {
   const db = knex
-  return db('sushi')
-    .where('id', id).select()
+  return db('tasks')
+    .insert(task)
 }
 
-function newSushi (sushi) {
+function editTask (task) {
   const db = knex
-  return db('sushi').insert(sushi)
+  return db('tasks')
+    .where('id', task.id).update(task)
 }
 
-function editSushi (sushi) {
+function deleteTask (id, task) {
   const db = knex
-  return db('sushi')
-    .where('id', sushi.id).update(sushi)
-}
-
-function deleteSushi (id) {
-  const db = knex
-  return db('sushi')
+  return db('tasks')
     .where('id', id).del()
 }
