@@ -8,7 +8,7 @@ class App extends React.Component {
     return (
       <div className="container">
         <Link to='/'>Home</Link>
-        <Route exact path='/' Component={Widget1} />
+        <Widget1 />
         <TaskList />
       </div>
     )
