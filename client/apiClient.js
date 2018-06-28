@@ -28,7 +28,7 @@ function addTask(task) {
 }
 
 function updateTask (task) {
-  return request.put(`api/v1/task`)
+  return request.put(`api/v1/tasks`)
     .send(task)
     .catch(err => {
       throw Error('Cannot PUT a Post!')
