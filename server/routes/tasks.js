@@ -17,6 +17,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const task = req.body
+  console.log(task)
   db.addTask(task)
     .then(() => {
       res.status(200).end()
