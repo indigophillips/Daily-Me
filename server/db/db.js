@@ -26,7 +26,7 @@ function editTask (task) {
     .where('id', task.id).update(task)
 }
 
-function deleteTask (id, task) {
+function deleteTask (id) {
   const db = knex
   return db('tasks')
     .where('id', id).del()

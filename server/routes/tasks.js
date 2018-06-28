@@ -42,8 +42,8 @@ router.put('/', (req, res) => {
 })
 
 router.delete('/', (req, res) => {
-  const {id, task} = req.body
-  db.deleteTask({id, task})
+  const {id} = req.body
+  db.deleteTask(id)
     .then(() => {
       res.status(200).end()
     })
