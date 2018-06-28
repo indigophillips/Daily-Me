@@ -99,7 +99,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteTask = exports.updateTask = exports.addTask = exports.getAllTasks = undefined;
+exports.getNewsApi = exports.deleteTask = exports.updateTask = exports.addTask = exports.getTasks = undefined;
 
 var _superagent = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
 
@@ -107,13 +107,14 @@ var _superagent2 = _interopRequireDefault(_superagent);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.getAllTasks = getAllTasks;
+exports.getTasks = getTasks;
 exports.addTask = addTask;
 exports.updateTask = updateTask;
 exports.deleteTask = deleteTask;
+exports.getNewsApi = getNewsApi;
 
 
-function getAllTasks() {
+function getTasks() {
   return _superagent2.default.get('/api/v1/tasks').then(function (resp) {
     return resp.body;
   }).catch(function (err) {
@@ -122,19 +123,35 @@ function getAllTasks() {
 }
 
 function addTask(task) {
-  return _superagent2.default.post('api/v1/tasks').send(task).catch(function (err) {
+  return _superagent2.default.post('/api/v1/tasks').send(task).catch(function (err) {
     console.error(err);
   });
 }
 
 function updateTask(task) {
-  return _superagent2.default.put('api/v1/tasks').send(task).catch(function (err) {
+  return _superagent2.default.put('/api/v1/tasks').send(task).catch(function (err) {
     throw Error('Cannot PUT a Post!');
   });
 }
 
 function deleteTask(taskId) {
-  return _superagent2.default.del('api/v1/tasks').send({ id: taskId }).catch(function (err) {
+  return _superagent2.default.del('/api/v1/tasks').send({ id: taskId }).catch(function (err) {
+    console.error(err);
+  });
+}
+
+// external api news
+
+function getNewsApi() {
+  return _superagent2.default.get('https://newsapi.org/v2/top-headlines?country=nz&apiKey=61a826273102483097cd398da8418fd3').then(function (resp) {
+    var _resp$articles$ = resp.articles[0],
+        title = _resp$articles$.title,
+        description = _resp$articles$.description,
+        url = _resp$articles$.url,
+        urlToImage = _resp$articles$.urlToImage;
+
+    return { title: title, description: description, url: url, urlToImage: urlToImage };
+  }).catch(function (err) {
     console.error(err);
   });
 }
