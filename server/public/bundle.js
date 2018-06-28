@@ -99,7 +99,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteTask = exports.updateTask = exports.addTask = exports.getAllTasks = undefined;
+exports.getNewsApi = exports.deleteTask = exports.updateTask = exports.addTask = exports.getAllTasks = undefined;
 
 var _superagent = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
 
@@ -111,6 +111,7 @@ exports.getAllTasks = getAllTasks;
 exports.addTask = addTask;
 exports.updateTask = updateTask;
 exports.deleteTask = deleteTask;
+exports.getNewsApi = getNewsApi;
 
 
 function getAllTasks() {
@@ -122,19 +123,35 @@ function getAllTasks() {
 }
 
 function addTask(task) {
-  return _superagent2.default.post('api/v1/tasks').send(task).catch(function (err) {
+  return _superagent2.default.post('/api/v1/tasks').send(task).catch(function (err) {
     console.error(err);
   });
 }
 
 function updateTask(task) {
-  return _superagent2.default.put('api/v1/tasks').send(task).catch(function (err) {
+  return _superagent2.default.put('/api/v1/tasks').send(task).catch(function (err) {
     throw Error('Cannot PUT a Post!');
   });
 }
 
 function deleteTask(taskId) {
-  return _superagent2.default.del('api/v1/tasks').send({ id: taskId }).catch(function (err) {
+  return _superagent2.default.del('/api/v1/tasks').send({ id: taskId }).catch(function (err) {
+    console.error(err);
+  });
+}
+
+// external api news
+
+function getNewsApi() {
+  return _superagent2.default.get('https://newsapi.org/v2/top-headlines?country=nz&apiKey=61a826273102483097cd398da8418fd3').then(function (resp) {
+    var _resp$articles$ = resp.articles[0],
+        title = _resp$articles$.title,
+        description = _resp$articles$.description,
+        url = _resp$articles$.url,
+        urlToImage = _resp$articles$.urlToImage;
+
+    return { title: title, description: description, url: url, urlToImage: urlToImage };
+  }).catch(function (err) {
     console.error(err);
   });
 }
@@ -319,11 +336,11 @@ var Header = function Header() {
       _react2.default.createElement(
         "div",
         { className: "headerLeft two columns" },
-        _react2.default.createElement("i", { "class": "fas fa-bars" })
+        _react2.default.createElement("i", { className: "fas fa-bars" })
       ),
       _react2.default.createElement(
         "div",
-        { className: "headerMiddle four columns" },
+        { className: "headerMiddle eight columns" },
         _react2.default.createElement("img", { className: "logo", src: "/logo.png", alt: "logo" })
       ),
       _react2.default.createElement("div", { className: "headerRight two columns" })
@@ -362,8 +379,6 @@ var _EditTask2 = _interopRequireDefault(_EditTask);
 var _apiClient = __webpack_require__(/*! ../apiClient */ "./client/apiClient.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -409,15 +424,21 @@ var Task = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _React$createElement;
-
       return _react2.default.createElement(
         'div',
-        { className: 'task' },
-        this.props.task.task,
-        _react2.default.createElement('input', (_React$createElement = { type: 'submit', id: 'editTask', value: 'Edit' }, _defineProperty(_React$createElement, 'id', 'editTask'), _defineProperty(_React$createElement, 'onClick', this.toggleHidden.bind(this)), _React$createElement)),
-        !this.state.isHidden && _react2.default.createElement(_EditTask2.default, { task: this.props.task, onChange: this.handleChange.bind(this) }),
-        _react2.default.createElement('input', { type: 'submit', value: 'Delete', id: 'deleteTask', onClick: this.deleteThisTask.bind(this, this.props.task), onChange: this.onChange })
+        { className: 'task row' },
+        _react2.default.createElement(
+          'div',
+          { className: 'eight columns' },
+          this.props.task.task
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'four columns taskButtons' },
+          _react2.default.createElement('input', { type: 'submit', value: 'Edit', onClick: this.toggleHidden.bind(this) }),
+          _react2.default.createElement('input', { type: 'submit', value: 'Delete', id: 'deleteTask', onClick: this.deleteThisTask.bind(this, this.props.task), onChange: this.onChange })
+        ),
+        !this.state.isHidden && _react2.default.createElement(_EditTask2.default, { task: this.props.task, onChange: this.handleChange.bind(this) })
       );
     }
   }]);
@@ -548,7 +569,7 @@ var TaskList = function (_React$Component) {
           _react2.default.createElement('input', { type: 'submit', id: 'taskSubmit', value: 'Add task' })
         ),
         _react2.default.createElement(
-          'ul',
+          'ol',
           null,
           this.state.tasks.map(function (task) {
             return _react2.default.createElement(

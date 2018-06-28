@@ -31,10 +31,15 @@ class Task extends React.Component {
 
   render() {
     return (
-      <div className="task">{this.props.task.task}
-        <input type="submit" id="editTask" value="Edit" id="editTask" onClick={this.toggleHidden.bind(this)} />
+      <div className="task row">
+        <div className="eight columns">
+          {this.props.task.task}
+        </div>
+        <div className="four columns taskButtons">
+          <input type="submit" value="Edit" onClick={this.toggleHidden.bind(this)} />
+          <input type="submit" value="Delete" id="deleteTask" onClick={this.deleteThisTask.bind(this, this.props.task)} onChange={this.onChange} />
+        </div>
         {!this.state.isHidden && <EditTask task={this.props.task} onChange={this.handleChange.bind(this)}  />}
-        <input type="submit" value="Delete" id="deleteTask" onClick={this.deleteThisTask.bind(this, this.props.task)} onChange={this.onChange} />
       </div>
     )
   }

@@ -9,17 +9,39 @@ header {
 
 .headerLeft {
   text-align: center;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .logo {
   height: 80px;
 }
 
+.headerMiddle {
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.9em;
+}
+
+#task, #editTask {
+  width: 100%;
+}
+
+
+input[type=submit] {
+  height: 28px;
+  line-height: 1em;
+}
+
+.taskButtons{
+  text-align: right;
+}
+
 #submitTask, #editTask, #deleteTask {
 
 }
 
-ul {
-  list-style-type: none;
+li {
+  margin-bottom: 0;
 }

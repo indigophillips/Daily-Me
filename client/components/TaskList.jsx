@@ -1,6 +1,6 @@
 import React from 'react'
 import Task from './Task'
-import { getAllTasks, addTask, updateTask, deleteTask } from '../apiClient'
+import { getAllTasks, addTask, updateTask } from '../apiClient'
 
 
 class TaskList extends React.Component {
@@ -59,13 +59,13 @@ class TaskList extends React.Component {
           <input type="text" placeholder="Type task here" name="task" id="task" onChange={this.updateTask.bind(this)} />
           <input type="submit" id="taskSubmit" value="Add task" />
         </form>
-        <ul>
+        <ol>
           {this.state.tasks.map(task => {
             return <li key={task.id}>
               <Task task={task} onChange={this.reloadTasks.bind(this)} />
             </li>
           })}
-        </ul>
+        </ol>
       </div>
     )
   }
