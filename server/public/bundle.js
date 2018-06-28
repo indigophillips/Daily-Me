@@ -99,7 +99,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteTask = exports.updateTask = exports.addTask = exports.getAllTasks = undefined;
+exports.getNewsApi = exports.deleteTask = exports.updateTask = exports.addTask = exports.getTasks = undefined;
 
 var _superagent = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
 
@@ -107,13 +107,14 @@ var _superagent2 = _interopRequireDefault(_superagent);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.getAllTasks = getAllTasks;
+exports.getTasks = getTasks;
 exports.addTask = addTask;
 exports.updateTask = updateTask;
 exports.deleteTask = deleteTask;
+exports.getNewsApi = getNewsApi;
 
 
-function getAllTasks() {
+function getTasks() {
   return _superagent2.default.get('/api/v1/tasks').then(function (resp) {
     return resp.body;
   }).catch(function (err) {
@@ -122,19 +123,35 @@ function getAllTasks() {
 }
 
 function addTask(task) {
-  return _superagent2.default.post('api/v1/tasks').send(task).catch(function (err) {
+  return _superagent2.default.post('/api/v1/tasks').send(task).catch(function (err) {
     console.error(err);
   });
 }
 
 function updateTask(task) {
-  return _superagent2.default.put('api/v1/tasks').send(task).catch(function (err) {
+  return _superagent2.default.put('/api/v1/tasks').send(task).catch(function (err) {
     throw Error('Cannot PUT a Post!');
   });
 }
 
 function deleteTask(taskId) {
-  return _superagent2.default.del('api/v1/tasks').send({ id: taskId }).catch(function (err) {
+  return _superagent2.default.del('/api/v1/tasks').send({ id: taskId }).catch(function (err) {
+    console.error(err);
+  });
+}
+
+// external api news
+
+function getNewsApi() {
+  return _superagent2.default.get('https://newsapi.org/v2/top-headlines?country=nz&apiKey=61a826273102483097cd398da8418fd3').then(function (resp) {
+    var _resp$articles$ = resp.articles[0],
+        title = _resp$articles$.title,
+        description = _resp$articles$.description,
+        url = _resp$articles$.url,
+        urlToImage = _resp$articles$.urlToImage;
+
+    return { title: title, description: description, url: url, urlToImage: urlToImage };
+  }).catch(function (err) {
     console.error(err);
   });
 }
@@ -320,6 +337,8 @@ var _EditTask = __webpack_require__(/*! ./EditTask */ "./client/components/EditT
 
 var _EditTask2 = _interopRequireDefault(_EditTask);
 
+var _apiClient = __webpack_require__(/*! ../apiClient */ "./client/apiClient.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -358,6 +377,12 @@ var Task = function (_React$Component) {
       this.props.onChange();
     }
   }, {
+    key: 'deleteThisTask',
+    value: function deleteThisTask(task) {
+      this.setState({ error: null });
+      (0, _apiClient.deleteTask)(task.id).then(this.props.onChange);
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -366,7 +391,7 @@ var Task = function (_React$Component) {
         this.props.task.task,
         _react2.default.createElement('input', { type: 'submit', id: 'editTask', value: 'Edit', onClick: this.toggleHidden.bind(this) }),
         !this.state.isHidden && _react2.default.createElement(_EditTask2.default, { task: this.props.task, onChange: this.handleChange.bind(this) }),
-        _react2.default.createElement('input', { type: 'submit', value: 'Delete', id: 'deleteTask', onClick: this.props.onClick })
+        _react2.default.createElement('input', { type: 'submit', value: 'Delete', id: 'deleteTask', onClick: this.deleteThisTask.bind(this, this.props.task), onChange: this.onChange })
       );
     }
   }]);
@@ -513,7 +538,7 @@ var TaskList = function (_React$Component) {
             return _react2.default.createElement(
               'li',
               { key: task.id },
-              _react2.default.createElement(_Task2.default, { task: task, onClick: _this6.deleteThisTask, onChange: _this6.reloadTasks.bind(_this6) })
+              _react2.default.createElement(_Task2.default, { task: task, onChange: _this6.reloadTasks.bind(_this6) })
             );
           })
         )

@@ -69,7 +69,7 @@ class TaskList extends React.Component {
         <ul>
           {this.state.tasks.map(task => {
             return <li key={task.id}>
-              <Task task={task} onClick={this.deleteThisTask} onChange={this.reloadTasks.bind(this)} />
+              <Task task={task} onChange={this.reloadTasks.bind(this)} />
             </li>
           })}
         </ul>
