@@ -99,7 +99,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getNewsApi = exports.deleteTask = exports.updateTask = exports.addTask = exports.getTasks = undefined;
+exports.getNewsApi = exports.deleteTask = exports.updateTask = exports.addTask = exports.getAllTasks = undefined;
 
 var _superagent = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
 
@@ -107,14 +107,14 @@ var _superagent2 = _interopRequireDefault(_superagent);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.getTasks = getTasks;
+exports.getAllTasks = getAllTasks;
 exports.addTask = addTask;
 exports.updateTask = updateTask;
 exports.deleteTask = deleteTask;
 exports.getNewsApi = getNewsApi;
 
 
-function getTasks() {
+function getAllTasks() {
   return _superagent2.default.get('/api/v1/tasks').then(function (resp) {
     return resp.body;
   }).catch(function (err) {
@@ -341,6 +341,8 @@ var _apiClient = __webpack_require__(/*! ../apiClient */ "./client/apiClient.js"
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -385,11 +387,13 @@ var Task = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _React$createElement;
+
       return _react2.default.createElement(
         'div',
         { className: 'task' },
         this.props.task.task,
-        _react2.default.createElement('input', { type: 'submit', id: 'editTask', value: 'Edit', onClick: this.toggleHidden.bind(this) }),
+        _react2.default.createElement('input', (_React$createElement = { type: 'submit', id: 'editTask', value: 'Edit' }, _defineProperty(_React$createElement, 'id', 'editTask'), _defineProperty(_React$createElement, 'onClick', this.toggleHidden.bind(this)), _React$createElement)),
         !this.state.isHidden && _react2.default.createElement(_EditTask2.default, { task: this.props.task, onChange: this.handleChange.bind(this) }),
         _react2.default.createElement('input', { type: 'submit', value: 'Delete', id: 'deleteTask', onClick: this.deleteThisTask.bind(this, this.props.task), onChange: this.onChange })
       );
@@ -553,6 +557,42 @@ exports.default = TaskList;
 
 /***/ }),
 
+/***/ "./client/components/Url.jsx":
+/*!***********************************!*\
+  !*** ./client/components/Url.jsx ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function url(props) {
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
+      'a',
+      { href: props.url },
+      'Click here for full article'
+    )
+  );
+}
+
+exports.default = url;
+
+/***/ }),
+
 /***/ "./client/components/widget1.jsx":
 /*!***************************************!*\
   !*** ./client/components/widget1.jsx ***!
@@ -573,6 +613,10 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Url = __webpack_require__(/*! ./Url */ "./client/components/Url.jsx");
+
+var _Url2 = _interopRequireDefault(_Url);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -592,8 +636,8 @@ var Widget1 = function (_React$Component) {
     _this.state = {
       title: 'hi',
       description: '',
-      url: '',
-      urlToImage: ''
+      url: 'https://www.google.com/',
+      urlToImage: 'https://resources.stuff.co.nz/content/dam/images/1/q/k/p/o/d/image.related.StuffLandscapeSixteenByNine.620x349.1qkr01.png/1530221568670.jpg'
     };
     return _this;
   }
@@ -601,9 +645,13 @@ var Widget1 = function (_React$Component) {
   _createClass(Widget1, [{
     key: 'render',
     value: function render() {
+      var url = this.state.url;
+      var urlToImage = this.state.urlToImage;
+      var styleImage = 'url("' + urlToImage + '")';
+
       return _react2.default.createElement(
         'div',
-        { className: 'newsBox' },
+        { className: 'newsBox', style: { backgroundImage: styleImage } },
         _react2.default.createElement(
           'div',
           { className: 'title' },
@@ -614,8 +662,11 @@ var Widget1 = function (_React$Component) {
           { className: 'description' },
           this.state.description
         ),
-        _react2.default.createElement('div', { className: 'url' }),
-        _react2.default.createElement('div', { className: 'title' })
+        _react2.default.createElement(
+          'div',
+          { className: 'url' },
+          _react2.default.createElement(_Url2.default, { url: url })
+        )
       );
     }
   }]);

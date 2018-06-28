@@ -1,3 +1,11 @@
 import React from 'react'
 
-const url 
+function url (props) {
+  return (
+    <div>
+      <a href={props.url}>Click here for full article</a>
+    </div>
+  )
+}
+
+export default url

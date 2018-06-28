@@ -1,4 +1,5 @@
 import React from 'react'
+import Url from './Url'
 
 class Widget1 extends React.Component {
   constructor (props) {
@@ -6,15 +7,18 @@ class Widget1 extends React.Component {
     this.state = {
       title: 'hi',
       description: '',
-      url: '',
-      urlToImage: ''
+      url: 'https://www.google.com/',
+      urlToImage: 'https://resources.stuff.co.nz/content/dam/images/1/q/k/p/o/d/image.related.StuffLandscapeSixteenByNine.620x349.1qkr01.png/1530221568670.jpg'
     }
   }
 
-
   render () {
+    const url = this.state.url
+    const urlToImage = this.state.urlToImage
+    const styleImage = 'url("' + urlToImage + '")'
+
     return (
-      <div className="newsBox">
+      <div className="newsBox" style={{backgroundImage: styleImage}}>
         <div className="title">
           {this.state.title}
         </div>
@@ -22,8 +26,7 @@ class Widget1 extends React.Component {
           {this.state.description}
         </div>
         <div className="url">
-        </div>
-        <div className="title">
+          <Url url={url} />
         </div>
       </div>
     )

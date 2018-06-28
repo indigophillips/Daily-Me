@@ -1,14 +1,14 @@
 import request from 'superagent'
 
 export {
-  getTasks,
+  getAllTasks,
   addTask,
   updateTask,
   deleteTask,
   getNewsApi
 }
 
-function getTasks () {
+function getAllTasks () {
   return request
     .get('/api/v1/tasks')
     .then(resp => {
