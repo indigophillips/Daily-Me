@@ -4,22 +4,9 @@ const router = express.Router()
 const db = require('../db/db')
 
 router.get('/', (req, res) => {
-  db.allSushi()
-    .then(sush => {
-      res.json(sush)
-    })
-    .catch(err => {
-      // eslint-disable-next-line no-console
-      console.error(err)
-      res.status(500).send('Unable to read from database')
-    })
-})
-
-router.get('/:id', (req, res) => {
-  const id = req.params.id
-  db.getSushi(id)
-    .then(sush => {
-      res.json(sush)
+  db.getTasks()
+    .then(task => {
+      res.json(task)
     })
     .catch(err => {
       // eslint-disable-next-line no-console
@@ -29,8 +16,8 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const sushi = req.body
-  db.newSushi(sushi)
+  const task = req.body
+  db.addTask(task)
     .then(() => {
       res.status(200).end()
     })
@@ -42,8 +29,8 @@ router.post('/', (req, res) => {
 })
 
 router.put('/', (req, res) => {
-  const sushi = req.body
-  db.editSushi(sushi)
+  const task = req.body
+  db.editTask(task)
     .then(() => {
       res.status(200).end()
     })
@@ -54,9 +41,9 @@ router.put('/', (req, res) => {
     })
 })
 
-router.delete('/:id', (req, res) => {
-  const id = req.params.id
-  db.deleteSushi(id)
+router.delete('/', (req, res) => {
+  const {id} = req.body
+  db.deleteTask(id)
     .then(() => {
       res.status(200).end()
     })
