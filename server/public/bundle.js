@@ -106,6 +106,10 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Task = __webpack_require__(/*! ./Task */ "./client/components/Task.jsx");
+
+var _Task2 = _interopRequireDefault(_Task);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -128,8 +132,8 @@ var App = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
-        'hi hi'
+        { className: 'container' },
+        _react2.default.createElement(_Task2.default, null)
       );
     }
   }]);
@@ -138,6 +142,99 @@ var App = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = App;
+
+/***/ }),
+
+/***/ "./client/components/Task.jsx":
+/*!************************************!*\
+  !*** ./client/components/Task.jsx ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Task = function (_React$Component) {
+  _inherits(Task, _React$Component);
+
+  function Task(props) {
+    _classCallCheck(this, Task);
+
+    var _this = _possibleConstructorReturn(this, (Task.__proto__ || Object.getPrototypeOf(Task)).call(this, props));
+
+    _this.state = {
+      tasks: [{
+        id: 1,
+        task: 'task 1'
+      }, {
+        id: 2,
+        task: 'task 2'
+      }]
+    };
+    return _this;
+  }
+
+  _createClass(Task, [{
+    key: 'editTask',
+    value: function editTask() {}
+  }, {
+    key: 'deleteTask',
+    value: function deleteTask() {}
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'task' },
+        _react2.default.createElement(
+          'h2',
+          null,
+          'Tasks of the day'
+        ),
+        _react2.default.createElement('input', { type: 'text', placeholder: 'Type task here', name: 'task', id: 'task' }),
+        _react2.default.createElement('input', { type: 'submit', id: 'taskSubmit', value: 'Add task' }),
+        _react2.default.createElement(
+          'ul',
+          null,
+          this.state.tasks.map(function (task) {
+            return _react2.default.createElement(
+              'li',
+              { key: task.id },
+              task.task,
+              ' ',
+              _react2.default.createElement('input', { type: 'submit', id: 'editTask', value: 'Edit' }),
+              ' ',
+              _react2.default.createElement('input', { type: 'submit', id: 'deleteTask', value: 'Delete' })
+            );
+          })
+        )
+      );
+    }
+  }]);
+
+  return Task;
+}(_react2.default.Component);
+
+exports.default = Task;
 
 /***/ }),
 
