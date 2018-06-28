@@ -165,6 +165,10 @@ var _TaskList = __webpack_require__(/*! ./TaskList */ "./client/components/TaskL
 
 var _TaskList2 = _interopRequireDefault(_TaskList);
 
+var _Header = __webpack_require__(/*! ./Header */ "./client/components/Header.jsx");
+
+var _Header2 = _interopRequireDefault(_Header);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -188,6 +192,7 @@ var App = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         { className: 'container' },
+        _react2.default.createElement(_Header2.default, null),
         _react2.default.createElement(_TaskList2.default, null)
       );
     }
@@ -271,8 +276,8 @@ var EditTask = function (_React$Component) {
       return _react2.default.createElement(
         'form',
         { className: 'hidden', onSubmit: this.editTask.bind(this) },
-        _react2.default.createElement('input', { type: 'text', value: this.state.task, onChange: this.updateTask.bind(this) }),
-        _react2.default.createElement('input', { type: 'submit', value: 'Submit' })
+        _react2.default.createElement('input', { type: 'text', id: 'editTask', value: this.state.task, onChange: this.updateTask.bind(this) }),
+        _react2.default.createElement('input', { type: 'submit', id: 'submitTask', value: 'Submit' })
       );
     }
   }]);
@@ -281,6 +286,52 @@ var EditTask = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = EditTask;
+
+/***/ }),
+
+/***/ "./client/components/Header.jsx":
+/*!**************************************!*\
+  !*** ./client/components/Header.jsx ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Header = function Header() {
+  return _react2.default.createElement(
+    "header",
+    { className: "header" },
+    _react2.default.createElement(
+      "nav",
+      { className: "row" },
+      _react2.default.createElement(
+        "div",
+        { className: "headerLeft two columns" },
+        _react2.default.createElement("i", { "class": "fas fa-bars" })
+      ),
+      _react2.default.createElement(
+        "div",
+        { className: "headerMiddle four columns" },
+        _react2.default.createElement("img", { className: "logo", src: "/logo.png", alt: "logo" })
+      ),
+      _react2.default.createElement("div", { className: "headerRight two columns" })
+    )
+  );
+};
+
+exports.default = Header;
 
 /***/ }),
 
@@ -471,16 +522,6 @@ var TaskList = function (_React$Component) {
       });
     }
   }, {
-    key: 'deleteThisTask',
-    value: function deleteThisTask(task) {
-      var _this5 = this;
-
-      this.setState({ error: null });
-      (0, _apiClient.deleteTask)(task.id).then(function () {
-        _this5.reloadTasks();
-      });
-    }
-  }, {
     key: 'updateTask',
     value: function updateTask(event) {
       this.setState({
@@ -490,7 +531,7 @@ var TaskList = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this6 = this;
+      var _this5 = this;
 
       return _react2.default.createElement(
         'div',
@@ -513,7 +554,7 @@ var TaskList = function (_React$Component) {
             return _react2.default.createElement(
               'li',
               { key: task.id },
-              _react2.default.createElement(_Task2.default, { task: task, onChange: _this6.reloadTasks.bind(_this6) })
+              _react2.default.createElement(_Task2.default, { task: task, onChange: _this5.reloadTasks.bind(_this5) })
             );
           })
         )

@@ -1,0 +1,25 @@
+
+header {
+  background-color: deeppink;
+}
+
+.fas {
+  font-size: 3em;
+}
+
+.headerLeft {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.logo {
+  height: 80px;
+}
+
+#submitTask, #editTask, #deleteTask {
+
+}
+
+ul {
+  list-style-type: none;
+}

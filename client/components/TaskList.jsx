@@ -45,14 +45,6 @@ class TaskList extends React.Component {
       .catch(err => this.setState({ error: err.message }))
   }
 
-  deleteThisTask(task) {
-    this.setState({ error: null })
-    deleteTask(task.id)
-      .then(() => {
-        this.reloadTasks()
-      })
-  }
-
   updateTask(event) {
     this.setState({
       task: event.target.value.substr(0, 50)
