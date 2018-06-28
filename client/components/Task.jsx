@@ -31,7 +31,7 @@ class Task extends React.Component {
 
   render() {
     return (
-      <div className="task row">
+      <div className="task individualTask row">
         <div className="eight columns">
           {this.props.task.task}
         </div>

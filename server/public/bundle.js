@@ -426,7 +426,7 @@ var Task = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'task row' },
+        { className: 'task individualTask row' },
         _react2.default.createElement(
           'div',
           { className: 'eight columns' },
@@ -563,12 +563,6 @@ var TaskList = function (_React$Component) {
           'Tasks of the day'
         ),
         _react2.default.createElement(
-          'form',
-          { onSubmit: this.addNewTask },
-          _react2.default.createElement('input', { type: 'text', placeholder: 'Type task here', name: 'task', id: 'task', onChange: this.updateTask.bind(this) }),
-          _react2.default.createElement('input', { type: 'submit', id: 'taskSubmit', value: 'Add task' })
-        ),
-        _react2.default.createElement(
           'ol',
           null,
           this.state.tasks.map(function (task) {
@@ -578,6 +572,12 @@ var TaskList = function (_React$Component) {
               _react2.default.createElement(_Task2.default, { task: task, onChange: _this5.reloadTasks.bind(_this5) })
             );
           })
+        ),
+        _react2.default.createElement(
+          'form',
+          { onSubmit: this.addNewTask },
+          _react2.default.createElement('input', { type: 'text', placeholder: 'Type task here', name: 'task', id: 'task', onChange: this.updateTask.bind(this) }),
+          _react2.default.createElement('input', { type: 'submit', id: 'taskSubmit', value: 'Add task' })
         )
       );
     }

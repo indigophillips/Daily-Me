@@ -5,6 +5,7 @@ header {
 
 .fas {
   font-size: 3em;
+  color: #044553;
 }
 
 .headerLeft {
@@ -24,6 +25,10 @@ h2 {
   font-size: 1.9em;
 }
 
+.individualTask {
+  padding-left: 10px;
+}
+
 #task, #editTask {
   width: 100%;
 }
@@ -32,14 +37,16 @@ h2 {
 input[type=submit] {
   height: 28px;
   line-height: 1em;
+  background-color: deeppink;
+  color: #044553;
 }
 
 .taskButtons{
   text-align: right;
 }
 
-#submitTask, #editTask, #deleteTask {
-
+ol {
+  list-style-type: none;
 }
 
 li {

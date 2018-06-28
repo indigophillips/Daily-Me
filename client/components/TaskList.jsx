@@ -55,10 +55,6 @@ class TaskList extends React.Component {
     return (
       <div className="task">
         <h2>Tasks of the day</h2>
-        <form onSubmit={this.addNewTask}>
-          <input type="text" placeholder="Type task here" name="task" id="task" onChange={this.updateTask.bind(this)} />
-          <input type="submit" id="taskSubmit" value="Add task" />
-        </form>
         <ol>
           {this.state.tasks.map(task => {
             return <li key={task.id}>
@@ -66,6 +62,10 @@ class TaskList extends React.Component {
             </li>
           })}
         </ol>
+        <form onSubmit={this.addNewTask}>
+          <input type="text" placeholder="Type task here" name="task" id="task" onChange={this.updateTask.bind(this)} />
+          <input type="submit" id="taskSubmit" value="Add task" />
+        </form>
       </div>
     )
   }
