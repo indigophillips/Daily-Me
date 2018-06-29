@@ -1,6 +1,6 @@
 import React from 'react'
 import {Route, Link} from 'react-router-dom'
-import Widget1 from './widget1'
+import Widget1 from './NewsBox'
 import TaskList from './TaskList'
 
 class App extends React.Component {

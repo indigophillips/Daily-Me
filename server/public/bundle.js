@@ -144,11 +144,11 @@ function deleteTask(taskId) {
 
 function getNewsApi() {
   return _superagent2.default.get('https://newsapi.org/v2/top-headlines?country=nz&apiKey=61a826273102483097cd398da8418fd3').then(function (resp) {
-    var _resp$articles$ = resp.articles[0],
-        title = _resp$articles$.title,
-        description = _resp$articles$.description,
-        url = _resp$articles$.url,
-        urlToImage = _resp$articles$.urlToImage;
+    var _resp$body$articles$ = resp.body.articles[0],
+        title = _resp$body$articles$.title,
+        description = _resp$body$articles$.description,
+        url = _resp$body$articles$.url,
+        urlToImage = _resp$body$articles$.urlToImage;
 
     return { title: title, description: description, url: url, urlToImage: urlToImage };
   }).catch(function (err) {
@@ -180,9 +180,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 
-var _widget = __webpack_require__(/*! ./widget1 */ "./client/components/widget1.jsx");
+var _NewsBox = __webpack_require__(/*! ./NewsBox */ "./client/components/NewsBox.jsx");
 
-var _widget2 = _interopRequireDefault(_widget);
+var _NewsBox2 = _interopRequireDefault(_NewsBox);
 
 var _TaskList = __webpack_require__(/*! ./TaskList */ "./client/components/TaskList.jsx");
 
@@ -216,7 +216,7 @@ var App = function (_React$Component) {
           { to: '/' },
           'Home'
         ),
-        _react2.default.createElement(_widget2.default, null),
+        _react2.default.createElement(_NewsBox2.default, null),
         _react2.default.createElement(_TaskList2.default, null)
       );
     }
@@ -310,6 +310,121 @@ var EditTask = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = EditTask;
+
+/***/ }),
+
+/***/ "./client/components/NewsBox.jsx":
+/*!***************************************!*\
+  !*** ./client/components/NewsBox.jsx ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Url = __webpack_require__(/*! ./Url */ "./client/components/Url.jsx");
+
+var _Url2 = _interopRequireDefault(_Url);
+
+var _apiClient = __webpack_require__(/*! ../apiClient */ "./client/apiClient.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Widget1 = function (_React$Component) {
+  _inherits(Widget1, _React$Component);
+
+  function Widget1(props) {
+    _classCallCheck(this, Widget1);
+
+    var _this = _possibleConstructorReturn(this, (Widget1.__proto__ || Object.getPrototypeOf(Widget1)).call(this, props));
+
+    _this.state = {
+      title: '',
+      description: '',
+      url: '',
+      urlToImage: ''
+    };
+    return _this;
+  }
+
+  _createClass(Widget1, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      (0, _apiClient.getNewsApi)().then(function (resp) {
+        var title = resp.title,
+            description = resp.description,
+            url = resp.url,
+            urlToImage = resp.urlToImage;
+
+        _this2.setState({
+          title: title,
+          description: description,
+          url: url,
+          urlToImage: urlToImage
+        });
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var url = this.state.url;
+      var urlToImage = this.state.urlToImage;
+      var styleImage = 'url("' + urlToImage + '")';
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'widgetBox', style: { backgroundImage: styleImage } },
+        _react2.default.createElement(
+          'h4',
+          null,
+          'News'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'newsBox' },
+          _react2.default.createElement(
+            'div',
+            { className: 'newsTitle' },
+            this.state.title
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'newsDescription' },
+            this.state.description
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'newsUrl' },
+            _react2.default.createElement(_Url2.default, { url: url })
+          )
+        )
+      );
+    }
+  }]);
+
+  return Widget1;
+}(_react2.default.Component);
+
+exports.default = Widget1;
 
 /***/ }),
 
@@ -590,91 +705,6 @@ function url(props) {
 }
 
 exports.default = url;
-
-/***/ }),
-
-/***/ "./client/components/widget1.jsx":
-/*!***************************************!*\
-  !*** ./client/components/widget1.jsx ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Url = __webpack_require__(/*! ./Url */ "./client/components/Url.jsx");
-
-var _Url2 = _interopRequireDefault(_Url);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Widget1 = function (_React$Component) {
-  _inherits(Widget1, _React$Component);
-
-  function Widget1(props) {
-    _classCallCheck(this, Widget1);
-
-    var _this = _possibleConstructorReturn(this, (Widget1.__proto__ || Object.getPrototypeOf(Widget1)).call(this, props));
-
-    _this.state = {
-      title: 'hi',
-      description: '',
-      url: 'https://www.google.com/',
-      urlToImage: 'https://resources.stuff.co.nz/content/dam/images/1/q/k/p/o/d/image.related.StuffLandscapeSixteenByNine.620x349.1qkr01.png/1530221568670.jpg'
-    };
-    return _this;
-  }
-
-  _createClass(Widget1, [{
-    key: 'render',
-    value: function render() {
-      var url = this.state.url;
-      var urlToImage = this.state.urlToImage;
-      var styleImage = 'url("' + urlToImage + '")';
-
-      return _react2.default.createElement(
-        'div',
-        { className: 'newsBox', style: { backgroundImage: styleImage } },
-        _react2.default.createElement(
-          'div',
-          { className: 'title' },
-          this.state.title
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'description' },
-          this.state.description
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'url' },
-          _react2.default.createElement(_Url2.default, { url: url })
-        )
-      );
-    }
-  }]);
-
-  return Widget1;
-}(_react2.default.Component);
-
-exports.default = Widget1;
 
 /***/ }),
 
