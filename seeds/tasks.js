@@ -6,3 +6,4 @@ exports.seed = (knex, Promise) => {
       ])
     })
 }
+

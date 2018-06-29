@@ -9,8 +9,8 @@ module.exports = {
   deleteTask
 }
 
-function getTasks () {
-  const db = knex
+function getTasks (testDb) {
+  const db = testDb || knex
   return db('tasks').select()
 }
 
