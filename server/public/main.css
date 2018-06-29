@@ -1,0 +1,20 @@
+.widgetBox {
+  background-repeat: no-repeat;
+  min-height: 25rem;
+  height: auto;
+}
+
+h4 {
+  margin-left: 1rem;
+  margin-top: 1rem;
+  width: 20%; 
+}
+
+.newsBox {
+  margin-right: 30%;
+  margin-top: 20%;
+}
+
+.newsTitle, .newsDescription, .newsUrl {
+  margin-left: 1rem;
+}
