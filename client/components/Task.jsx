@@ -3,19 +3,19 @@ import EditTask from './EditTask'
 import { deleteTask } from '../apiClient'
 
 class Task extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       isHidden: true
     }
   }
 
-  toggleHidden() {
+  toggleHidden () {
     this.setState({
       isHidden: !this.state.isHidden
     })
   }
- 
+
   handleChange () {
     this.setState({
       isHidden: true

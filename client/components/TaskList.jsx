@@ -2,9 +2,8 @@ import React from 'react'
 import Task from './Task'
 import { getAllTasks, addTask, updateTask } from '../apiClient'
 
-
 class TaskList extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       tasks: [],
@@ -17,41 +16,42 @@ class TaskList extends React.Component {
     this.updateTask = this.updateTask.bind(this)
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.reloadTasks()
   }
 
-  reloadTasks(){
+  reloadTasks () {
     getAllTasks()
       .then(tasks => {
-        this.setState({ tasks })
+        this.setState({tasks})
       })
   }
 
-  addNewTask(e) {
+  addNewTask (e) {
     e.preventDefault()
-    this.setState({ error: null })
-    const newTask = { task: this.state.task }
+    this.setState({error: null})
+    const newTask = {task: this.state.task}
     addTask(newTask)
       .then(() => {
         this.reloadTasks()
       })
-      .catch(err => this.setState({ errorMessage: err.message }))
+      .catch(err => this.setState({errorMessage: err.message}))
   }
 
-  editTask(task) {
-    this.setState({ error: null })
+  editTask (task) {
+    this.setState({error: null})
     updateTask(task)
-      .catch(err => this.setState({ error: err.message }))
+      .catch(err => this.setState({error: err.message}))
   }
 
-  updateTask(event) {
+  updateTask (event) {
+
     this.setState({
       task: event.target.value.substr(0, 50)
     })
   }
 
-  render() {
+  render () {
     return (
       <div className="task">
         <h2>Tasks of the day</h2>
@@ -69,8 +69,6 @@ class TaskList extends React.Component {
       </div>
     )
   }
-
 }
-
 
 export default TaskList
