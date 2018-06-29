@@ -32,6 +32,7 @@ class TaskList extends React.Component {
     this.setState({error: null})
     const newTask = {task: this.state.task}
     addTask(newTask)
+      .then(this.setState({task:''}))
       .then(() => {
         this.reloadTasks()
       })
@@ -62,7 +63,7 @@ class TaskList extends React.Component {
             </li>
           })}
         </ol>
-        <form onSubmit={this.addNewTask}>
+        <form className="inputForm" onSubmit={this.addNewTask}>
           <input type="text" placeholder="Type task here" name="task" id="task" onChange={this.updateTask.bind(this)} />
           <input type="submit" id="taskSubmit" value="Add task" />
         </form>

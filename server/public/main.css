@@ -1,15 +1,30 @@
-header {
-  background-color: deeppink;
+
+body {
+  font-family: 'Encode Sans Condensed', sans-serif;
 }
 
-.fas {
+.container {
+  width: 100%;
+}
+
+nav {
+  padding-left: 15px;
+  padding-top: 10px;
+}
+
+header {
+  background-color: #da29fd;
+}
+
+.fa-bars {
   font-size: 3em;
   color: #044553;
 }
 
 .headerLeft {
-  text-align: center;
-  margin-top: 15px;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 10px;
 }
 
 .logo {
@@ -17,7 +32,12 @@ header {
 }
 
 .headerMiddle {
+  display: inline-block;
   text-align: center;
+}
+
+.task {
+  padding: 2%;
 }
 
 h2 {
@@ -26,22 +46,40 @@ h2 {
 
 .individualTask {
   padding-left: 10px;
+  padding-bottom: 5px;
 }
 
 #task, #editTask {
   width: 100%;
 }
 
+.inputForm, .editInputForm {
+  margin-top: 5%;
+}
 
-input[type=submit] {
+input[type=submit], button {
   height: 28px;
   line-height: 1em;
-  background-color: deeppink;
+  background-color: #da29fd;
   color: #044553;
+  width: 70px;
+  border: 1px solid white;
+}
+
+#editTaskButton, #deleteTask {
+  width: 30px;
+}
+
+.taskInput, .taskButtons {
+  display: inline-block
+}
+
+.taskInput {
+  width: 60%;
 }
 
 .taskButtons{
-  text-align: right;
+  float: right;
 }
 
 ol {
@@ -49,6 +87,26 @@ ol {
 }
 
 li {
+  line-height: 1.5em;
+}
+
+#taskSubmit, #submitTask {
+  margin-top: 10px;
+}
+
+footer {
+  text-align: center;
+  position:fixed;
+   left:0px;
+   bottom:0px;
+   height:50px;
+   width:100%;
+}
+
+.footerImage {
+  height: 50px;
+}
+
   margin-bottom: 0;
 }
 

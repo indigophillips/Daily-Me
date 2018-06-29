@@ -28,9 +28,9 @@ class EditTask extends React.Component {
 
   render () {
     return (
-      <form className="hidden" onSubmit={this.editTask.bind(this)} >
+      <form className="editInputForm" onSubmit={this.editTask.bind(this)} >
         <input type="text" id="editTask" value={this.state.task} onChange={this.updateTask.bind(this)} />
-        <input type="submit" id="submitTask" value="Submit" />
+        <button id="submitTask"><i className="fas fa-paper-plane"></i>Submit</button>
       </form>
     )
   }
