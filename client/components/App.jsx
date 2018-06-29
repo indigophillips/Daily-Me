@@ -1,5 +1,5 @@
 import React from 'react'
-import {Route, Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import Widget1 from './NewsBox'
 import TaskList from './TaskList'
 
