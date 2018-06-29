@@ -1,6 +1,6 @@
 import React from 'react'
 import Task from './Task'
-import {getAllTasks, addTask, updateTask, deleteTask} from '../apiClient'
+import { getAllTasks, addTask, updateTask } from '../apiClient'
 
 class TaskList extends React.Component {
   constructor (props) {
@@ -44,15 +44,8 @@ class TaskList extends React.Component {
       .catch(err => this.setState({error: err.message}))
   }
 
-  deleteThisTask (task) {
-    this.setState({error: null})
-    deleteTask(task.id)
-      .then(() => {
-        this.reloadTasks()
-      })
-  }
-
   updateTask (event) {
+
     this.setState({
       task: event.target.value.substr(0, 50)
     })
@@ -62,17 +55,17 @@ class TaskList extends React.Component {
     return (
       <div className="task">
         <h2>Tasks of the day</h2>
-        <form onSubmit={this.addNewTask}>
-          <input type="text" placeholder="Type task here" name="task" id="task" onChange={this.updateTask.bind(this)} />
-          <input type="submit" id="taskSubmit" value="Add task" />
-        </form>
-        <ul>
+        <ol>
           {this.state.tasks.map(task => {
             return <li key={task.id}>
               <Task task={task} onChange={this.reloadTasks.bind(this)} />
             </li>
           })}
-        </ul>
+        </ol>
+        <form onSubmit={this.addNewTask}>
+          <input type="text" placeholder="Type task here" name="task" id="task" onChange={this.updateTask.bind(this)} />
+          <input type="submit" id="taskSubmit" value="Add task" />
+        </form>
       </div>
     )
   }
