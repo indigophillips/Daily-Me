@@ -297,9 +297,14 @@ var EditTask = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'form',
-        { className: 'hidden', onSubmit: this.editTask.bind(this) },
+        { className: 'editInputForm', onSubmit: this.editTask.bind(this) },
         _react2.default.createElement('input', { type: 'text', id: 'editTask', value: this.state.task, onChange: this.updateTask.bind(this) }),
-        _react2.default.createElement('input', { type: 'submit', id: 'submitTask', value: 'Submit' })
+        _react2.default.createElement(
+          'button',
+          { id: 'submitTask' },
+          _react2.default.createElement('i', { className: 'fas fa-paper-plane' }),
+          'Submit'
+        )
       );
     }
   }]);
@@ -372,15 +377,14 @@ var Header = function Header() {
       { className: "row" },
       _react2.default.createElement(
         "div",
-        { className: "headerLeft two columns" },
+        { className: "headerLeft" },
         _react2.default.createElement("i", { className: "fas fa-bars" })
       ),
       _react2.default.createElement(
         "div",
-        { className: "headerMiddle eight columns" },
+        { className: "headerMiddle" },
         _react2.default.createElement("img", { className: "logo", src: "/logo.png", alt: "logo" })
-      ),
-      _react2.default.createElement("div", { className: "headerRight two columns" })
+      )
     )
   );
 };
@@ -466,14 +470,22 @@ var Task = function (_React$Component) {
         { className: 'task individualTask row' },
         _react2.default.createElement(
           'div',
-          { className: 'eight columns' },
+          { className: 'taskInput' },
           this.props.task.task
         ),
         _react2.default.createElement(
           'div',
-          { className: 'four columns taskButtons' },
-          _react2.default.createElement('input', { type: 'submit', value: 'Edit', onClick: this.toggleHidden.bind(this) }),
-          _react2.default.createElement('input', { type: 'submit', value: 'Delete', id: 'deleteTask', onClick: this.deleteThisTask.bind(this, this.props.task), onChange: this.onChange })
+          { className: 'taskButtons' },
+          _react2.default.createElement(
+            'button',
+            { id: 'editTaskButton', onClick: this.toggleHidden.bind(this) },
+            _react2.default.createElement('i', { className: 'far fa-edit' })
+          ),
+          _react2.default.createElement(
+            'button',
+            { id: 'deleteTask', onClick: this.deleteThisTask.bind(this, this.props.task), onChange: this.onChange },
+            _react2.default.createElement('i', { className: 'fa fa-trash', 'aria-hidden': 'true' })
+          )
         ),
         !this.state.isHidden && _react2.default.createElement(_EditTask2.default, { task: this.props.task, onChange: this.handleChange.bind(this) })
       );
@@ -563,7 +575,7 @@ var TaskList = function (_React$Component) {
       e.preventDefault();
       this.setState({ error: null });
       var newTask = { task: this.state.task };
-      (0, _apiClient.addTask)(newTask).then(function () {
+      (0, _apiClient.addTask)(newTask).then(this.setState({ task: '' })).then(function () {
         _this3.reloadTasks();
       }).catch(function (err) {
         return _this3.setState({ errorMessage: err.message });
@@ -612,7 +624,7 @@ var TaskList = function (_React$Component) {
         ),
         _react2.default.createElement(
           'form',
-          { onSubmit: this.addNewTask },
+          { className: 'inputForm', onSubmit: this.addNewTask },
           _react2.default.createElement('input', { type: 'text', placeholder: 'Type task here', name: 'task', id: 'task', onChange: this.updateTask.bind(this) }),
           _react2.default.createElement('input', { type: 'submit', id: 'taskSubmit', value: 'Add task' })
         )

@@ -32,12 +32,12 @@ class Task extends React.Component {
   render() {
     return (
       <div className="task individualTask row">
-        <div className="eight columns">
+        <div className="taskInput">
           {this.props.task.task}
         </div>
-        <div className="four columns taskButtons">
-          <input type="submit" value="Edit" onClick={this.toggleHidden.bind(this)} />
-          <input type="submit" value="Delete" id="deleteTask" onClick={this.deleteThisTask.bind(this, this.props.task)} onChange={this.onChange} />
+        <div className="taskButtons">
+          <button id="editTaskButton" onClick={this.toggleHidden.bind(this)}><i className="far fa-edit"></i></button>
+          <button id="deleteTask" onClick={this.deleteThisTask.bind(this, this.props.task)} onChange={this.onChange}><i className="fa fa-trash" aria-hidden="true"></i></button>
         </div>
         {!this.state.isHidden && <EditTask task={this.props.task} onChange={this.handleChange.bind(this)}  />}
       </div>
