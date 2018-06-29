@@ -41,11 +41,10 @@ test('editTask edits an existing task', () => {
 })
 
 test('deleteTask deletes an existing task', () => {
-  const expected = 1
+  const expected = 0
   const gh = {id: 1}
   return db.deleteTask(gh, testDb)
     .then(res => {
-      console.log(res)
       const actual = res
       expect(actual).toBe(expected)
     })
