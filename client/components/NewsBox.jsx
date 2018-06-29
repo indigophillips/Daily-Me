@@ -33,16 +33,18 @@ class Widget1 extends React.Component {
 
     return (
       <div className="widgetBox" style={{backgroundImage: styleImage}}>
-        <h4>News</h4>
-        <div className="newsBox" >
-          <div className="newsTitle">
-            {this.state.title}
-          </div>
-          <div className="newsDescription">
-            {this.state.description}
-          </div>
-          <div className="newsUrl">
-            <Url url={url} />
+        <div className="overlay">
+          <h2>News</h2>
+          <div className="newsBox">
+            <div className="newsTitle">
+              {this.state.title}
+            </div>
+            <div className="newsDescription">
+              {this.state.description}
+            </div>
+            <div className="newsUrl">
+              <Url url={url} />
+            </div>
           </div>
         </div>
       </div>

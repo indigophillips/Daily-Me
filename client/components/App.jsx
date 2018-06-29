@@ -10,9 +10,8 @@ class App extends React.Component {
     return (
       <div className="container">
         <Header />
-        <Link to='/'>Home</Link>
-        <Widget1 />
         <TaskList />
+        <Widget1 />
         <Footer />
       </div>
     )

@@ -37,7 +37,7 @@ function updateTask (task) {
 }
 
 function deleteTask (taskId) {
-  return request.del('/api/v1/tasks').send({ id: taskId })
+  return request.del('/api/v1/tasks').send({id: taskId})
     .catch(err => {
       console.error(err)
     })
