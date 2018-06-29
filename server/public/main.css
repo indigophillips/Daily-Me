@@ -1,6 +1,6 @@
 
 header {
-  background-color: deeppink;
+  background-color: #da29fd;
 }
 
 .fas {
@@ -37,7 +37,7 @@ h2 {
 input[type=submit] {
   height: 28px;
   line-height: 1em;
-  background-color: deeppink;
+  background-color: #da29fd;
   color: #044553;
 }
 
@@ -51,4 +51,17 @@ ol {
 
 li {
   margin-bottom: 0;
+}
+
+footer {
+  text-align: center;
+  position:fixed;
+   left:0px;
+   bottom:0px;
+   height:50px;
+   width:100%;
+}
+
+.footerImage {
+  height: 50px;
 }
