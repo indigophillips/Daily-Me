@@ -9,25 +9,25 @@ module.exports = {
   deleteTask
 }
 
-function getTasks () {
-  const db = knex
+function getTasks (testDb) {
+  const db = testDb || knex
   return db('tasks').select()
 }
 
-function addTask (task) {
-  const db = knex
+function addTask (task, testDb) {
+  const db = testDb || knex
   return db('tasks')
     .insert(task)
 }
 
-function editTask (task) {
-  const db = knex
+function editTask (task, testDb) {
+  const db = testDb || knex
   return db('tasks')
     .where('id', task.id).update(task)
 }
 
-function deleteTask (id) {
-  const db = knex
+function deleteTask (id, testDb) {
+  const db = testDb || knex
   return db('tasks')
     .where('id', id).del()
 }

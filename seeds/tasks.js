@@ -3,6 +3,7 @@ exports.seed = (knex, Promise) => {
     .then(function () {
       return knex('tasks').insert([
         {id: 1, task: 'Buy new running shoes'}
+
       ])
     })
 }
