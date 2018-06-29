@@ -5,7 +5,8 @@ export {
   addTask,
   updateTask,
   deleteTask,
-  getNewsApi
+  getNewsApi,
+  getWeatherApi
 }
 
 function getAllTasks () {
@@ -37,7 +38,7 @@ function updateTask (task) {
 }
 
 function deleteTask (taskId) {
-  return request.del('/api/v1/tasks').send({ id: taskId })
+  return request.del('/api/v1/tasks').send({id: taskId})
     .catch(err => {
       console.error(err)
     })
@@ -51,6 +52,17 @@ function getNewsApi () {
     .then(resp => {
       const {title, description, url, urlToImage} = resp.body.articles[0]
       return {title, description, url, urlToImage}
+    })
+    .catch(err => {
+      console.error(err)
+    })
+}
+function getWeatherApi () {
+  return request
+    .get('https://www.metaweather.com/api/location/2348079')
+    .then(resp => {
+      const weather = resp.body.consolidated_weather[0]
+      resp.json(weather)
     })
     .catch(err => {
       console.error(err)
