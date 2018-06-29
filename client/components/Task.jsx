@@ -3,19 +3,19 @@ import EditTask from './EditTask'
 import { deleteTask } from '../apiClient'
 
 class Task extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       isHidden: true
     }
   }
 
-  toggleHidden() {
+  toggleHidden () {
     this.setState({
       isHidden: !this.state.isHidden
     })
   }
- 
+
   handleChange () {
     this.setState({
       isHidden: true
@@ -31,10 +31,15 @@ class Task extends React.Component {
 
   render() {
     return (
-      <div className="task">{this.props.task.task}
-        <input type="submit" id="editTask" value="Edit" id="editTask" onClick={this.toggleHidden.bind(this)} />
+      <div className="task individualTask row">
+        <div className="taskInput">
+          {this.props.task.task}
+        </div>
+        <div className="taskButtons">
+          <button id="editTaskButton" onClick={this.toggleHidden.bind(this)}><i className="far fa-edit"></i></button>
+          <button id="deleteTask" onClick={this.deleteThisTask.bind(this, this.props.task)} onChange={this.onChange}><i className="fa fa-trash" aria-hidden="true"></i></button>
+        </div>
         {!this.state.isHidden && <EditTask task={this.props.task} onChange={this.handleChange.bind(this)}  />}
-        <input type="submit" value="Delete" id="deleteTask" onClick={this.deleteThisTask.bind(this, this.props.task)} onChange={this.onChange} />
       </div>
     )
   }

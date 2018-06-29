@@ -3,10 +3,9 @@ import React from 'react'
 const Header = () => {
   return(
     <header className="header">
-      <nav>
-        <div className="headerLeft"></div>
-        <div className="headerMiddle"><h1>dailyMe</h1></div>
-        <div className="headerRight"></div>
+      <nav className="row">
+        <div className="headerLeft"><i className="fas fa-bars"></i></div>
+        <div className="headerMiddle"><img className="logo" src="/logo.png" alt="logo" /></div>
       </nav>
     </header>
   )

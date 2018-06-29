@@ -1,10 +1,9 @@
 import React from 'react'
 import Task from './Task'
-import { getAllTasks, addTask, updateTask, deleteTask } from '../apiClient'
-
+import { getAllTasks, addTask, updateTask } from '../apiClient'
 
 class TaskList extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       tasks: [],
@@ -17,68 +16,60 @@ class TaskList extends React.Component {
     this.updateTask = this.updateTask.bind(this)
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.reloadTasks()
   }
 
-  reloadTasks(){
+  reloadTasks () {
     getAllTasks()
       .then(tasks => {
-        this.setState({ tasks })
+        this.setState({tasks})
       })
   }
 
-  addNewTask(e) {
+  addNewTask (e) {
     e.preventDefault()
-    this.setState({ error: null })
-    const newTask = { task: this.state.task }
+    this.setState({error: null})
+    const newTask = {task: this.state.task}
     addTask(newTask)
+      .then(this.setState({task:''}))
       .then(() => {
         this.reloadTasks()
       })
-      .catch(err => this.setState({ errorMessage: err.message }))
+      .catch(err => this.setState({errorMessage: err.message}))
   }
 
-  editTask(task) {
-    this.setState({ error: null })
+  editTask (task) {
+    this.setState({error: null})
     updateTask(task)
-      .catch(err => this.setState({ error: err.message }))
+      .catch(err => this.setState({error: err.message}))
   }
 
-  deleteThisTask(task) {
-    this.setState({ error: null })
-    deleteTask(task.id)
-      .then(() => {
-        this.reloadTasks()
-      })
-  }
+  updateTask (event) {
 
-  updateTask(event) {
     this.setState({
       task: event.target.value.substr(0, 50)
     })
   }
 
-  render() {
+  render () {
     return (
       <div className="task">
         <h2>Tasks of the day</h2>
-        <form onSubmit={this.addNewTask}>
-          <input type="text" placeholder="Type task here" name="task" id="task" onChange={this.updateTask.bind(this)} />
-          <input type="submit" id="taskSubmit" value="Add task" />
-        </form>
-        <ul>
+        <ol>
           {this.state.tasks.map(task => {
             return <li key={task.id}>
               <Task task={task} onChange={this.reloadTasks.bind(this)} />
             </li>
           })}
-        </ul>
+        </ol>
+        <form className="inputForm" onSubmit={this.addNewTask}>
+          <input type="text" placeholder="Type task here" name="task" id="task" onChange={this.updateTask.bind(this)} />
+          <input type="submit" id="taskSubmit" value="Add task" />
+        </form>
       </div>
     )
   }
-
 }
-
 
 export default TaskList

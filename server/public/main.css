@@ -1,0 +1,132 @@
+
+body {
+  font-family: 'Encode Sans Condensed', sans-serif;
+}
+
+.container {
+  width: 100%;
+}
+
+nav {
+  padding-left: 15px;
+  padding-top: 10px;
+}
+
+header {
+  background-color: #da29fd;
+}
+
+.fa-bars {
+  font-size: 3em;
+  color: #044553;
+}
+
+.headerLeft {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 10px;
+}
+
+.logo {
+  height: 80px;
+}
+
+.headerMiddle {
+  display: inline-block;
+  text-align: center;
+}
+
+.task {
+  padding: 2%;
+}
+
+h2 {
+  font-size: 1.9em;
+}
+
+.individualTask {
+  padding-left: 10px;
+  padding-bottom: 5px;
+}
+
+#task, #editTask {
+  width: 100%;
+}
+
+.inputForm, .editInputForm {
+  margin-top: 5%;
+}
+
+input[type=submit], button {
+  height: 28px;
+  line-height: 1em;
+  background-color: #da29fd;
+  color: #044553;
+  width: 70px;
+  border: 1px solid white;
+}
+
+#editTaskButton, #deleteTask {
+  width: 30px;
+}
+
+.taskInput, .taskButtons {
+  display: inline-block
+}
+
+.taskInput {
+  width: 60%;
+}
+
+.taskButtons{
+  float: right;
+}
+
+ol {
+  list-style-type: none;
+}
+
+li {
+  line-height: 1.5em;
+}
+
+#taskSubmit, #submitTask {
+  margin-top: 10px;
+}
+
+footer {
+  text-align: center;
+  position:fixed;
+   left:0px;
+   bottom:0px;
+   height:50px;
+   width:100%;
+}
+
+.footerImage {
+  height: 50px;
+}
+
+  margin-bottom: 0;
+}
+
+.widgetBox {
+  background-repeat: no-repeat;
+  min-height: 25rem;
+  height: auto;
+}
+
+h4 {
+  margin-left: 1rem;
+  margin-top: 1rem;
+  width: 20%; 
+}
+
+.newsBox {
+  margin-right: 30%;
+  margin-top: 20%;
+}
+
+.newsTitle, .newsDescription, .newsUrl {
+  margin-left: 1rem;
+}

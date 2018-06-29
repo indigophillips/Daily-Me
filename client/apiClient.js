@@ -1,14 +1,14 @@
 import request from 'superagent'
 
 export {
-  getTasks,
+  getAllTasks,
   addTask,
   updateTask,
   deleteTask,
   getNewsApi
 }
 
-function getTasks () {
+function getAllTasks () {
   return request
     .get('/api/v1/tasks')
     .then(resp => {
@@ -49,7 +49,7 @@ function getNewsApi () {
   return request
     .get('https://newsapi.org/v2/top-headlines?country=nz&apiKey=61a826273102483097cd398da8418fd3')
     .then(resp => {
-      const {title, description, url, urlToImage} = resp.articles[0]
+      const {title, description, url, urlToImage} = resp.body.articles[0]
       return {title, description, url, urlToImage}
     })
     .catch(err => {
