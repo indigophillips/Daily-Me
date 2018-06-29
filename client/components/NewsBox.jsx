@@ -37,7 +37,7 @@ class Widget1 extends React.Component {
           <h2>News</h2>
           <div className="newsBox">
             <div className="newsTitle">
-              {this.state.title}
+            <h3>{this.state.title}</h3>
             </div>
             <div className="newsDescription">
               {this.state.description}
