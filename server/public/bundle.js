@@ -325,6 +325,8 @@ var _EditTask = __webpack_require__(/*! ./EditTask */ "./client/components/EditT
 
 var _EditTask2 = _interopRequireDefault(_EditTask);
 
+var _apiClient = __webpack_require__(/*! ../apiClient */ "./client/apiClient.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -365,6 +367,12 @@ var Task = function (_React$Component) {
       this.props.onChange();
     }
   }, {
+    key: 'deleteThisTask',
+    value: function deleteThisTask(task) {
+      this.setState({ error: null });
+      (0, _apiClient.deleteTask)(task.id).then(this.props.onChange);
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _React$createElement;
@@ -375,7 +383,7 @@ var Task = function (_React$Component) {
         this.props.task.task,
         _react2.default.createElement('input', (_React$createElement = { type: 'submit', id: 'editTask', value: 'Edit' }, _defineProperty(_React$createElement, 'id', 'editTask'), _defineProperty(_React$createElement, 'onClick', this.toggleHidden.bind(this)), _React$createElement)),
         !this.state.isHidden && _react2.default.createElement(_EditTask2.default, { task: this.props.task, onChange: this.handleChange.bind(this) }),
-        _react2.default.createElement('input', { type: 'submit', value: 'Delete', id: 'deleteTask', onClick: this.props.onClick })
+        _react2.default.createElement('input', { type: 'submit', value: 'Delete', id: 'deleteTask', onClick: this.deleteThisTask.bind(this, this.props.task), onChange: this.onChange })
       );
     }
   }]);
@@ -522,7 +530,7 @@ var TaskList = function (_React$Component) {
             return _react2.default.createElement(
               'li',
               { key: task.id },
-              _react2.default.createElement(_Task2.default, { task: task, onClick: _this6.deleteThisTask, onChange: _this6.reloadTasks.bind(_this6) })
+              _react2.default.createElement(_Task2.default, { task: task, onChange: _this6.reloadTasks.bind(_this6) })
             );
           })
         )
