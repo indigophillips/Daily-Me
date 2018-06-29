@@ -156,3 +156,17 @@ a, a:visited, a:hover {
   color: #fff;
 }
 
+.widgetBoxWeather {
+  background-image: url('./cloudy1.jpg')
+}
+
+.weatherBox {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  letter-spacing: 1.5px;
+  line-height: 1.3em;
+}
+
+.weatherState, .maxTemp, .theTemp, .humidity, .minTemp {
+  margin-top: 6px;
+}
