@@ -21,7 +21,7 @@ class WeatherBox extends React.Component {
   render () {
     const weather = this.state.weather
     return (
-      <div className="widgetBox">
+      <div className="widgetBox widgetBoxWeather">
         <div className="overlay">
           <h2>Weather</h2>
           <div className="weatherBox">
