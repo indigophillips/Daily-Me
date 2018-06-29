@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import request from 'superagent'
 
 export {
@@ -57,12 +59,13 @@ function getNewsApi () {
       console.error(err)
     })
 }
+
 function getWeatherApi () {
   return request
-    .get('https://www.metaweather.com/api/location/2348079')
+    .get('/api/v1/weather')
     .then(resp => {
-      const weather = resp.body.consolidated_weather[0]
-      resp.json(weather)
+      const weather = resp.body
+      return weather
     })
     .catch(err => {
       console.error(err)
