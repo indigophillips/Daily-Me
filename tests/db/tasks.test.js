@@ -15,8 +15,27 @@ test('getTasks gets all tasks', () => {
   const expected = 1
   return db.getTasks(testDb)
     .then(res => {
-      console.log(res)
       const actual = res.length
+      expect(actual).toBe(expected)
+    })
+})
+
+test('addTask adds new task', () => {
+  const expected = 1
+  const task = {task: 'poo'}
+  return db.addTask(task, testDb)
+    .then(res => {
+      const actual = res.length
+      expect(actual).toBe(expected)
+    })
+})
+
+test('editTask edits an existing task', () => {
+  const expected = 1
+  const task = {id: 1, task: 'poo'}
+  return db.editTask(task, testDb)
+    .then(res => {
+      const actual = res
       expect(actual).toBe(expected)
     })
 })
