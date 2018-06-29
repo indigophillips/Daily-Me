@@ -101,6 +101,7 @@ footer {
    bottom:0px;
    height:50px;
    width:100%;
+   background-color: white;
 }
 
 .footerImage {
@@ -113,15 +114,21 @@ footer {
   min-height: 25rem;
   height: auto;
   font-size: 1.2rem;
+  background-size: cover;
+  margin-bottom: 20px;
 }
 
 .newsBox {
   margin-right: 30%;
   margin-top: 0%;
+  width: 100%;
+  letter-spacing: 1.5px;
+  line-height: 1.3em;
 }
 
 .newsTitle, .newsDescription, .newsUrl {
   margin-left: 1rem;
+  margin-top: 1rem;
 }
 
 .widgetBox h2 {
@@ -140,6 +147,12 @@ footer {
     color: #FFF;
 }
 
-a {
-  text-decoration-color: #FFF 
+.widgetBox h3 {
+  font-weight: 600;
 }
+
+a, a:visited, a:hover {
+  text-decoration-color: #FFF;
+  color: #fff;
+}
+
